@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
 # Register your models here.
-from .models import Question, Choice, Lesson, Entry, Fill_in, Quiz
+from .models import Question, Choice, Lesson, Entry, Choice2, Quiz
 
 class EditLinkToInlineObject(object):
     def edit_link(self, instance):
@@ -18,13 +18,13 @@ class ChoiceInline(admin.TabularInline):
     model = Choice
     extra = 3
 
-class Fill_inInLine(admin.TabularInline):
-    model = Fill_in
+class Choice2Inline(admin.TabularInline):
+    model = Choice2
     extra = 3
 
 class QuizInLine(EditLinkToInlineObject, admin.TabularInline):
     model = Quiz
-    inlines = [Fill_inInLine]
+    inlines = [Choice2Inline]
     readonly_fields = ('edit_link',)
 
 class QuestionInLine(EditLinkToInlineObject, admin.TabularInline):
@@ -36,7 +36,7 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [ChoiceInline]
 
 class QuizAdmin(admin.ModelAdmin):
-    inlines = [Fill_inInLine]
+    inlines = [Choice2Inline]
 
 class EntryInLine(admin.TabularInline):
     model = Entry

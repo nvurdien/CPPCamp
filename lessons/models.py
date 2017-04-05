@@ -32,6 +32,7 @@ class Question(models.Model):
     lesson_num = models.IntegerField()
     lesson = models.ForeignKey(Lesson)
     answer = models.TextField()
+    hint = models.TextField()
     def __str__(self):
         return self.question_text
     def was_published_recently(self):
@@ -60,11 +61,13 @@ class Quiz(models.Model):
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.TextField()
+    answer = models.BooleanField()
     def __str__(self):
         return self.choice_text
 
-class Fill_in(models.Model):
+class Choice2(models.Model):
     question = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    text = models.TextField()
+    choice_text = models.TextField()
+    answer = models.BooleanField()
     def __str__(self):
-        return self.text
+        return self.choice_text
