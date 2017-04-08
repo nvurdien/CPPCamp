@@ -2,18 +2,6 @@
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'lessons/style.css' %}" />
-<script>
-function openNav() {
-    document.getElementById("mySidenav").style.width = "20%";
-    document.getElementById("main").style.marginLeft = "20%";
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft= "20%";
-}
-</script>
-
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -29,24 +17,26 @@ function closeNav() {
   <span style="font-size:30px;cursor:crosshair;display:inline-block" onclick="openNav()">&#9776;</span>
 
 <h1>Exercise</h1>
+<form id = "exercise">
 {% for question in lesson.question_set.all %}
 {% autoescape off %}{{ question.question_text }} {% endautoescape %}<BR>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<form name = "{{question.lesson_num}}">
 {% for choice in question.choice_set.all %}
   {% if choice.answer %}
-<input type="radio" name="{{question.lesson_num}}" id="correct" value="correct" />
+<input type="radio" name="question{{question.pk}}" value=1 />{% autoescape off %}{{ choice.choice_text }}{% endautoescape %}<BR>
   {% else %}
-<input type="radio" name="{{question.lesson_num}}" id="{{question.lesson_num}}choice{{ forloop.counter }}" value="{{ choice.id }}" />
+<input type="radio" name="question{{question.pk}}" value=0 />{% autoescape off %}{{ choice.choice_text }}{% endautoescape %}<BR>
   {% endif %}
-<label for="choice{{ forloop.counter }}">{% autoescape off %}{{ choice.choice_text }}{% endautoescape %}</label><br />
+<!--<label for="{{question.pk}}choice{{ forloop.counter }}"></label><br />-->
 
+{% endfor %}
+<BR>
+{% endfor %}<BR><BR>
+<input type="submit" value="Submit"/><BR><BR>
 </form>
-{% endfor %}
-<BR><BR>
-{% endfor %}
-
 </div>
+
+<p id="grade">Your grade is: </p>
+
 <button class="accordion"></button>
 <div class="panel">
   {% for question in lesson.question_set.all %}
@@ -59,19 +49,38 @@ function closeNav() {
 
 <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
 
-<script>
-var acc = document.getElementsByClassName("accordion");
-var i;
+  <script type='text/javascript'>
+  function openNav() {
+      document.getElementById("mySidenav").style.width = "20%";
+      document.getElementById("main").style.marginLeft = "20%";
+  }
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].onclick = function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight){
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
+  function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft= "20%";
+  }
+  $("#exercise").submit(function(e) {
+    result = 0
+    e.preventDefault();
+    {% for question in lesson.question_set.all %}
+       result += parseInt(document.querySelector('input[name = "question{{question.pk}}"]:checked').value);
+       count++;
+    {% endfor %}
+    document.getElementById("grade").innerHTML = count;
+  return false; // required to not refresh the page; just leave this here
+} );//this ends the submit function
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.maxHeight){
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
     }
   }
-}
-</script>
+  </script>

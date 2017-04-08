@@ -17,12 +17,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth import views
 from lessons.views import HomePageView, ResourcePageView
 
 urlpatterns = [
+    url('^', include('django.contrib.auth.urls')),
     url(r'^$', HomePageView.as_view(), name = 'home'),
     url(r'^resources/', ResourcePageView.as_view(), name = 'resources'),
     url(r'^lessons/', include('lessons.urls')),
-    #url(r'^Exercise/),
     url(r'^admin/', admin.site.urls),
 ]
