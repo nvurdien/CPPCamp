@@ -35,9 +35,8 @@
 
       <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
         <script type='text/javascript'>
-      $("exercise").submit(function(e) {
+        document.getElementById("exercise").onsubmit=function() {
           result = 0
-          e.preventDefault();
           {% for question in lesson.question_set.all %}
              result += parseInt(document.querySelector('input[name = "question{{question.pk}}"]:checked').value);
              count++;
