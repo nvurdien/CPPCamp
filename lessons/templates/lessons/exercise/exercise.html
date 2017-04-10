@@ -1,21 +1,6 @@
+{% extends "base.html" %}
 
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'lessons/style.css' %}" />
-
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-<a href="{% url 'home' %}" class="active">Home</a>
-
-<a href = "{% url 'lessons:index' %}"class="active">Lessons</a>
-
-<a href="{% url 'resources' %}"class="active">Resources</a>
-
-</div>
-
-<div id="main">
-  <span style="font-size:30px;cursor:crosshair;display:inline-block" onclick="openNav()">&#9776;</span>
-
+{% block content %}
 <h1>Exercise</h1>
 <form id = "exercise">
 {% for question in lesson.question_set.all %}
@@ -45,42 +30,37 @@
 <BR><BR>
   <p align=center><a href="/../lessons/{{lesson.lesson_id}}" class="backbutton"><span><font-size=14px>Return to Lesson</font></span></a>
     <a href="/../lessons/quiz/{{lesson.lesson_id}}" class="button"><span><font-size=14px>Quiz {{lesson.lesson_id}}</font></span></a><BR><BR>
+
 </div>
 
-<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+      <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+        <script type='text/javascript'>
+      $("exercise").submit(function(e) {
+          result = 0
+          e.preventDefault();
+          {% for question in lesson.question_set.all %}
+             result += parseInt(document.querySelector('input[name = "question{{question.pk}}"]:checked').value);
+             count++;
+          {% endfor %}
+          document.getElementById("grade").innerHTML = results;
+        return false; // required to not refresh the page; just leave this here
+      } );//this ends the submit function
+        var acc = document.getElementsByClassName("accordion");
+        var i;
 
-  <script type='text/javascript'>
-  function openNav() {
-      document.getElementById("mySidenav").style.width = "20%";
-      document.getElementById("main").style.marginLeft = "20%";
-  }
+        for (i = 0; i < acc.length; i++) {
+          acc[i].onclick = function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight){
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+          }
+        }
+        </script>
 
-  function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-      document.getElementById("main").style.marginLeft= "20%";
-  }
-  $("#exercise").submit(function(e) {
-    result = 0
-    e.preventDefault();
-    {% for question in lesson.question_set.all %}
-       result += parseInt(document.querySelector('input[name = "question{{question.pk}}"]:checked').value);
-       count++;
-    {% endfor %}
-    document.getElementById("grade").innerHTML = count;
-  return false; // required to not refresh the page; just leave this here
-} );//this ends the submit function
-  var acc = document.getElementsByClassName("accordion");
-  var i;
+<div>
 
-  for (i = 0; i < acc.length; i++) {
-    acc[i].onclick = function() {
-      this.classList.toggle("active");
-      var panel = this.nextElementSibling;
-      if (panel.style.maxHeight){
-        panel.style.maxHeight = null;
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-      }
-    }
-  }
-  </script>
+{% endblock %}

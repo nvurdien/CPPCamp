@@ -17,11 +17,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.contrib.auth import views
+from django.contrib.auth import views as auth_views
+from django.views.generic.base import TemplateView
 from lessons.views import HomePageView, ResourcePageView
 
 urlpatterns = [
-    url('^', include('django.contrib.auth.urls')),
+    url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^logout/$', auth_views.logout, {'template_name': 'logged_out.html'}, name='logout'),
+    #url('^', include('django.contrib.auth.urls')),
     url(r'^$', HomePageView.as_view(), name = 'home'),
     url(r'^resources/', ResourcePageView.as_view(), name = 'resources'),
     url(r'^lessons/', include('lessons.urls')),

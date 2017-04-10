@@ -1,51 +1,6 @@
-<!--how I do this? Make these links show up ;-; for loop easier
-<div id="mySidenav" class="sidenav">
-<a href="{% url 'home' %}" class="active">Home </a>
+{% extends "base.html" %}
 
-<a href = "{% url 'lessons:index' %}"class="active">LESSONS</a>
-
-
-{%  for lesson in latest_lesson_list %}
-
-<a href="{% url 'lessons:detail' lesson.id %}"class="active">{{ lesson.name }}</a>
-{% for entry in lesson.entry_set.all %}
-<a href={{lesson.id}}/#{{entry.lesson_header}}>{{ entry.lesson_header }}</a>
-{% endfor %}
-{% endfor %}
-
-<a href="{% url 'resources' %}"class="active">Resources</a>
-
-</div>
--->
-
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'lessons/style.css' %}" />
-<script>
-function openNav() {
-    document.getElementById("mySidenav").style.width = "20%";
-    document.getElementById("main").style.marginLeft = "20%";
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft= "20%";
-}
-</script>
-
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-<a href="{% url 'home' %}" class="active">Home</a>
-
-<a href = "{% url 'lessons:index' %}"class="active">Lessons</a>
-
-
-<a href="{% url 'resources' %}"class="active">Resources</a>
-
-</div>
-
-<div id = "main">
-  <span style="font-size:30px;cursor:crosshair;display:inline-block" onclick="openNav()">&#9776;</span>
+{% block content %}
   <h1>Lessons</h1>
   Write something about lessons here.<BR><BR><BR>
 {% for lesson in latest_lesson_list %}
@@ -72,4 +27,4 @@ Write something about quizzes here<BR><BR><BR>
 {% for lesson in latest_lesson_list %}
 <a href="/../lessons/quiz/{{lesson.lesson_id}}">{{lesson.name}} Quiz</a><BR>
 {% endfor %}
-</div>
+{% endblock %}
