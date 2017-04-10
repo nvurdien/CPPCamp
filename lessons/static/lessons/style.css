@@ -1,5 +1,3 @@
-
-
 .sidenav {
     height: 100%;
     width: 0;
@@ -22,7 +20,7 @@
     transition: 0.3s;
 }
 
-.sidenav a:hover, .offcanvas a:focus{
+.sidenav a:hover, .offcanvas a:focus {
     color: #f1f1f1 !important;
 }
 
@@ -39,15 +37,22 @@
     padding: 16px;
     top: 80%;
     left: 0;
-    padding-top: 60px; /* Place content 60px from the top*/
+    padding-top: 60px;
+    /* Place content 60px from the top*/
     margin-left: 20%;
     margin-right: 20%;
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
 }
+
+
 /*
 
 a.nav, a.nav:visited, a.nav:active
@@ -76,13 +81,14 @@ letter-spacing:5px;}
 
 
 */
-.sidenav2{
+
+.sidenav2 {
     top: 150px;
     width: 10%;
     left: 50px;
     border-style: outset;
     border-color: gray;
-    position:fixed;
+    position: fixed;
 }
 
 .sidenav2 a {
@@ -93,10 +99,8 @@ letter-spacing:5px;}
     text-decoration: none !important;
 }
 
-.sidenav2 a:not(:last-child)
-{
-  border-bottom: none;
-
+.sidenav2 a:not(:last-child) {
+    border-bottom: none;
 }
 
 .sidenav2 a:hover {
@@ -105,162 +109,171 @@ letter-spacing:5px;}
     text-decoration: none !important;
 }
 
-
-A:link{
-  text-decoration: underline;
-color:#1b00a2;
-font-family: Arial;
+A:link {
+    text-decoration: underline;
+    color: #1b00a2;
+    font-family: Arial;
 }
 
-A:visited{
-  text-decoration: underline;
-  color:#1b00a2;
-  font-family: Arial;}
-
-A:active{
-  text-decoration: underline;
-  color:#1b00a2;
-  font-family: Arial;}
-
-a:hover{
-color: black;
-text-decoration: underline;
-text-transform:;
-font-family: Arial;
-cursor:crosshair;
-font-size:;
+A:visited {
+    text-decoration: underline;
+    color: #1b00a2;
+    font-family: Arial;
 }
 
+A:active {
+    text-decoration: underline;
+    color: #1b00a2;
+    font-family: Arial;
+}
 
-h1{
-color: black;
-font-size: 25pt;
-font-family: Arial;
+a:hover {
+    color: black;
+    text-decoration: underline;
+    text-transform: ;
+    font-family: Arial;
+    cursor: crosshair;
+    font-size: ;
+}
+
+h1 {
+    color: black;
+    font-size: 25pt;
+    font-family: Arial;
 }
 
 body, tr, td {
-font-family: arial;
-font-size: 12px;
-color: black;}
+    font-family: arial;
+    font-size: 12px;
+    color: black;
+}
 
-b,B,strong,STRONG{font-weight: bold; color: black;}
+b, B, strong, STRONG {
+    font-weight: bold;
+    color: black;
+}
 
-i,I,EM,em{font-weight: normal; color: A140C2;}
+i, I, EM, em {
+    font-weight: normal;
+    color: A140C2;
+}
 
-U,u{font-weight: normal; color: green;}
-
+U, u {
+    font-weight: normal;
+    color: green;
+}
 
 ul {
-  list-style: square;
+    list-style: square;
 }
+
 li {
-  padding-left: 16px;
+    padding-left: 16px;
 }
+
 body {
-  background: white;
+    background: white;
 }
 
 pre {
-  display: inline-block;
-  background: orange;
+    display: inline-block;
+    background: orange;
 }
 
 .button {
-  border-radius: 4px;
-  background-color: gray !important;
-  border: none;
-  color: white !important;
-  text-align: center;
-  text-decoration: none !important;
-  font-size: 16px;
-  padding: 20px;
-  width: 100px;
-  transition: all 0.5s;
-  cursor: crosshair;
-  margin: 5px;
+    border-radius: 4px;
+    background-color: gray !important;
+    border: none;
+    color: white !important;
+    text-align: center;
+    text-decoration: none !important;
+    font-size: 16px;
+    padding: 20px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: crosshair;
+    margin: 5px;
 }
 
 .button span {
-  cursor: crosshair;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-  text-decoration: none !important;
+    cursor: crosshair;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+    text-decoration: none !important;
 }
 
 .button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  color: white;
-  background-color: gray;
-  transition: 0.5s;
-  text-decoration: none !important;
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    color: white;
+    background-color: gray;
+    transition: 0.5s;
+    text-decoration: none !important;
 }
 
 .button:hover span {
-  padding-right: 25px;
-  text-decoration: none !important;
-
+    padding-right: 25px;
+    text-decoration: none !important;
 }
 
 .button:hover span:after {
-  opacity: 1;
-  right: 0;
-  text-decoration: none !important;
+    opacity: 1;
+    right: 0;
+    text-decoration: none !important;
 }
+
 
 /**/
 
 .backbutton {
-  border-radius: 4px;
-  background-color: gray !important;
-  border: none;
-  color: white !important;
-  text-align: center;
-  text-decoration: none !important;
-  font-size: 16px;
-  padding: 20px;
-  width: 100px;
-  transition: all 0.5s;
-  cursor: crosshair;
-  margin: 5px;
+    border-radius: 4px;
+    background-color: gray !important;
+    border: none;
+    color: white !important;
+    text-align: center;
+    text-decoration: none !important;
+    font-size: 16px;
+    padding: 20px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: crosshair;
+    margin: 5px;
 }
 
 .backbutton span {
-  cursor: crosshair;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-  text-decoration: none !important;
+    cursor: crosshair;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+    text-decoration: none !important;
 }
 
 .backbutton span:after {
-  content: '«';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  left: -20px;
-  color: white;
-  background-color: gray;
-  transition: 0.5s;
-  text-decoration: none !important;
+    content: '«';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: -20px;
+    color: white;
+    background-color: gray;
+    transition: 0.5s;
+    text-decoration: none !important;
 }
 
 .backbutton:hover span {
-  padding-left: 25px;
-  text-decoration: none !important;
-
+    padding-left: 25px;
+    text-decoration: none !important;
 }
 
 .backbutton:hover span:after {
-  opacity: 1;
-  left: 0;
-  text-decoration: none !important;
+    opacity: 1;
+    left: 0;
+    text-decoration: none !important;
 }
-
 
 button.accordion {
     background-color: #eee;
@@ -287,11 +300,9 @@ button.accordion:after {
     margin-left: 5px;
 }
 
-
 button.accordion.active:after {
     content: "Hide Answers";
 }
-
 
 div.panel {
     padding: 0 18px;

@@ -1,22 +1,22 @@
 {% extends "base.html" %}
-
 {% block content %}
 <h1>Exercise</h1>
-<form id = "exercise">
-{% for question in lesson.question_set.all %}
-{% autoescape off %}{{ question.question_text }} {% endautoescape %}<BR>
-{% for choice in question.choice_set.all %}
-  {% if choice.answer %}
-<input type="radio" name="question{{question.pk}}" value=1 />{% autoescape off %}{{ choice.choice_text }}{% endautoescape %}<BR>
-  {% else %}
-<input type="radio" name="question{{question.pk}}" value=0 />{% autoescape off %}{{ choice.choice_text }}{% endautoescape %}<BR>
-  {% endif %}
-<!--<label for="{{question.pk}}choice{{ forloop.counter }}"></label><br />-->
+<form id="exercise">
+    {% for question in lesson.question_set.all %} {% autoescape off %}{{ question.question_text }} {% endautoescape %}
+    <BR> {% for choice in question.choice_set.all %} {% if choice.answer %}
+    <input type="radio" name="question{{question.pk}}" value=1 />{% autoescape off %}{{ choice.choice_text }}{% endautoescape %}
+    <BR> {% else %}
+    <input type="radio" name="question{{question.pk}}" value=0 />{% autoescape off %}{{ choice.choice_text }}{% endautoescape %}
+    <BR> {% endif %}
+    <!--<label for="{{question.pk}}choice{{ forloop.counter }}"></label><br />-->
 
-{% endfor %}
-<BR>
-{% endfor %}<BR><BR>
-<input type="submit" value="Submit"/><BR><BR>
+    {% endfor %}
+    <BR> {% endfor %}
+    <BR>
+    <BR>
+    <input type="submit" value="Submit" />
+    <BR>
+    <BR>
 </form>
 </div>
 
@@ -24,42 +24,52 @@
 
 <button class="accordion"></button>
 <div class="panel">
-  {% for question in lesson.question_set.all %}
-  {% autoescape off %}{{question.answer}} {% endautoescape %}
-  {% endfor %}
-<BR><BR>
-  <p align=center><a href="/../lessons/{{lesson.lesson_id}}" class="backbutton"><span><font-size=14px>Return to Lesson</font></span></a>
-    <a href="/../lessons/quiz/{{lesson.lesson_id}}" class="button"><span><font-size=14px>Quiz {{lesson.lesson_id}}</font></span></a><BR><BR>
+    {% for question in lesson.question_set.all %} {% autoescape off %}{{question.answer}} {% endautoescape %} {% endfor %}
+    <BR>
+    <BR>
+    <p align=center><a href="/../lessons/{{lesson.lesson_id}}" class="backbutton"><span><font-size=14px>Return to Lesson</font></span></a>
+        <a href="/../lessons/quiz/{{lesson.lesson_id}}" class="button"><span><font-size=14px>Quiz {{lesson.lesson_id}}</font></span></a>
+        <BR>
+        <BR>
 
 </div>
 
-      <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
-        <script type='text/javascript'>
-        document.getElementById("exercise").onsubmit=function() {
-          result = 0
-          {% for question in lesson.question_set.all %}
-             result += parseInt(document.querySelector('input[name = "question{{question.pk}}"]:checked').value);
-             count++;
-          {% endfor %}
-          document.getElementById("grade").innerHTML = results;
-        return false; // required to not refresh the page; just leave this here
-      } );//this ends the submit function
-        var acc = document.getElementsByClassName("accordion");
-        var i;
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<script type='text/javascript'>
+    document.getElementById("exercise").onsubmit = function() {
+    result = 0
+    { % for question in lesson.question_set.all % }
+    result += parseInt(document.querySelector('input[name = "question{{question.pk}}"]:checked').value);
+    count++;
+    { % endfor % }
+    document.getElementById("grade").innerHTML = results;
+    return false; // required to not refresh the page; just leave this here
+    }; //this ends the submit function
+    var acc = document.getElementsByClassName("accordion");
+    var i;
 
-        for (i = 0; i < acc.length; i++) {
-          acc[i].onclick = function() {
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function() {
             this.classList.toggle("active");
             var panel = this.nextElementSibling;
-            if (panel.style.maxHeight){
-              panel.style.maxHeight = null;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
             } else {
-              panel.style.maxHeight = panel.scrollHeight + "px";
+                panel.style.maxHeight = panel.scrollHeight + "px";
             }
-          }
         }
-        </script>
+    }
+</script>
 
 <div>
-
 {% endblock %}

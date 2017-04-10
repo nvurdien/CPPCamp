@@ -1,30 +1,33 @@
 {% extends "base.html" %}
-
 {% block content %}
-  <h1>Lessons</h1>
-  Write something about lessons here.<BR><BR><BR>
-{% for lesson in latest_lesson_list %}
+<h1>Lessons</h1> Write something about lessons here.
+<BR>
+<BR>
+<BR> {% for lesson in latest_lesson_list %}
 <a href="/../lessons/{{lesson.lesson_id}}">{{lesson.name}}</a>
 <ul>
-{% for entry in lesson.entry_set.all %}
+    {% for entry in lesson.entry_set.all %}
 
-  <li><a href=/../lessons/{{lesson.lesson_id}}/#{{entry.lesson_header}}>{{entry.lesson_header}}</a></li>
+    <li><a href=/../lessons/{{lesson.lesson_id}}/#{{entry.lesson_header}}>{{entry.lesson_header}}</a></li>
 
-{% endfor %}
-<li><a href="/../lessons/exercise/{{lesson.lesson_id}}">{{lesson.name}} Exercises</a></li>
-<li><a href="/../lessons/quiz/{{lesson.lesson_id}}">{{lesson.name}} Quiz</a></li>
-</ul><BR>
-{% endfor %}
+    {% endfor %}
+    <li><a href="/../lessons/exercise/{{lesson.lesson_id}}">{{lesson.name}} Exercises</a></li>
+    <li><a href="/../lessons/quiz/{{lesson.lesson_id}}">{{lesson.name}} Quiz</a></li>
+</ul>
+<BR> {% endfor %}
 <BR>
-<h1>Exercises</h1>
-Write something about exercises here<BR><BR><BR>
-{% for lesson in latest_lesson_list %}
-<a href="/../lessons/exercise/{{lesson.lesson_id}}">{{lesson.name}} Exercises</a><BR>
-{% endfor %}
-<BR><BR>
-<h1>Quizzes</h1>
-Write something about quizzes here<BR><BR><BR>
-{% for lesson in latest_lesson_list %}
-<a href="/../lessons/quiz/{{lesson.lesson_id}}">{{lesson.name}} Quiz</a><BR>
-{% endfor %}
+<h1>Exercises</h1> Write something about exercises here
+<BR>
+<BR>
+<BR> {% for lesson in latest_lesson_list %}
+<a href="/../lessons/exercise/{{lesson.lesson_id}}">{{lesson.name}} Exercises</a>
+<BR> {% endfor %}
+<BR>
+<BR>
+<h1>Quizzes</h1> Write something about quizzes here
+<BR>
+<BR>
+<BR> {% for lesson in latest_lesson_list %}
+<a href="/../lessons/quiz/{{lesson.lesson_id}}">{{lesson.name}} Quiz</a>
+<BR> {% endfor %}
 {% endblock %}

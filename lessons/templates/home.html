@@ -1,25 +1,25 @@
 {% extends "base.html" %}
-
 {% block content %}
-
 {% if user.is_authenticated %}
-   <h2> Welcome Back {{ user.username }}!</h2><BR>
-     <p>Our purpose is to ensure that high school students have a means of supplementing their computer science education as well as inspiring them to follow a path related to computer science.
-     <BR>
-     In the Lessons tab, we cover the basics ranging from Hello World to variables. As we implement more features into the site, the content in the lessons will improve significantly.
-     <BR>
-     In the Resources tab, we have included links to IDEs as well as additional sites that can help with learning more about the basics.
-     <BR></p><BR><BR>
+<h2> Welcome Back {{ user.username }}!</h2>
+<BR>
+<p>Our purpose is to ensure that high school students have a means of supplementing their computer science education as well as inspiring them to follow a path related to computer science.
+    <BR> In the Lessons tab, we cover the basics ranging from Hello World to variables. As we implement more features into the site, the content in the lessons will improve significantly.
+    <BR> In the Resources tab, we have included links to IDEs as well as additional sites that can help with learning more about the basics.
+    <BR>
+</p>
+<BR>
+<BR>
 <a href="{% url 'lessons:index' %}" class="button"><span>Click to Go to the Lessons Page</span></a>
-
 {% else %}
 <h1> Welcome to CPP Camp</h1>
 <p>Our purpose is to ensure that high school students have a means of supplementing their computer science education as well as inspiring them to follow a path related to computer science.
+    <BR> In the Lessons tab, we cover the basics ranging from Hello World to variables. As we implement more features into the site, the content in the lessons will improve significantly.
+    <BR> In the Resources tab, we have included links to IDEs as well as additional sites that can help with learning more about the basics.
+    <BR>
+</p>
 <BR>
-In the Lessons tab, we cover the basics ranging from Hello World to variables. As we implement more features into the site, the content in the lessons will improve significantly.
 <BR>
-In the Resources tab, we have included links to IDEs as well as additional sites that can help with learning more about the basics.
-<BR></p><BR><BR>
 <a href="{% url 'lessons:detail' 1 %}" class="button"><span>Click to Get Started</span></a>
 {% endif %}
 {% endblock %}

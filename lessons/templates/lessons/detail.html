@@ -1,11 +1,10 @@
 {% extends "base.html" %}
-
 {% block content %}
 
 <h1>{{ lesson.name }}</h1>
-
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
 {% for entry in lesson.entry_set.all %}
 <span id={{entry.lesson_header}}>
 <h2>{{ entry.lesson_header }}</h2></a>
