@@ -1,67 +1,77 @@
- {% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'lessons/style.css' %}" />
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "20%";
-        document.getElementById("main").style.marginLeft = "20%";
+{% extends "base.html" %}
+{% block content %}
+<h1>Quiz</h1>
+<form id="quiz">
+{% for quiz in lesson.quiz_set.all %} {% autoescape off %}{{quiz.lesson_num}}. {{ quiz.question_text }} {% endautoescape %}
+<BR> {% for choice2 in quiz.choice2_set.all %} {% if choice2.answer %}
+<input type="radio" name="quiz{{quiz.pk}}" value=1 />{% autoescape off %}{{ choice2.choice_text }}{% endautoescape %}
+<BR> {% else %}
+<input type="radio" name="quiz{{quiz.pk}}" value=0 />{% autoescape off %}{{ choice2.choice_text }}{% endautoescape %}
+<BR> {% endif %}
+<!--<label for="{{question.pk}}choice{{ forloop.counter }}"></label><br />-->
+{% endfor %}
+<BR> {% endfor %}
+    <BR>
+    <BR>
+    <input type="button" id="submit" value="Submit">
+    <BR>
+    <BR>
+</form>
+<p id="grade"></p>
+</div>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+  <script>
+  document.getElementById("submit").onclick = function() {
+  var result=0;
+  var corrections = new Array();
+  var count=0;
+  var i=0;
+  {% for quiz in lesson.quiz_set.all %}
+  if(parseInt(document.querySelector('input[name = "quiz{{quiz.pk}}"]:checked').value) != 1)
+  {
+  corrections[i] = "<BR>{{quiz.lesson_num}}"+". "+"{% autoescape off %}{{quiz.answer}} {% endautoescape %}";
+  i++;
+  }
+  else {
+    corrections[i] = "<BR>{{quiz.lesson_num}}"+". "+"{% autoescape off %}{{quiz.answer}} {% endautoescape %}";
+    i++;
+    result++;
+  }
+  count++;
+  {% endfor %}
+  if(result/count*100 < 75){
+  document.getElementById("grade").innerHTML = "You got "+result+"/"+count+". Please retake the quiz!"+"<BR><BR><BR><BR>";
+  /*for(j=0; j < corrections.length; j++)
+  {
+    document.getElementById("grade").innerHTML += corrections[j];
+  }*/
+  document.getElementById("grade").innerHTML += "<BR><p align=center><a href="+"/../lessons/{{lesson.lesson_id}}"+ " class="+"backbutton"+"><span><font-size=14px>Return to Lesson</font></span></a>";
+}
+  else
+  {
+    document.getElementById("grade").innerHTML = "You got "+result+"/"+count+". Good Job! If you would like to retake the test please choose different choices then hit submit!"+"<BR><BR><BR><BR>";
+    for(j=0; j < corrections.length; j++)
+    {
+      document.getElementById("grade").innerHTML += corrections[j];
     }
 
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "20%";
-    }
-</script>
+    document.getElementById("grade").innerHTML += "<BR><BR><BR><BR><BR><BR>";
+    document.getElementById("grade").innerHTML += "<BR><p align=center><a href="+"/../lessons/{{lesson.lesson_id}}"+ " class="+"backbutton"+"><span><font-size=14px>Return to Lesson</font></span></a>"+"<a href="+"/../lessons/{{lesson.lesson_id|add:1}}"+" class="+"button"+"><span><font-size=14px>Next Lesson</font></span></a>";
+  }
 
-
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="{% url 'home' %}" class="active">Home</a>
-
-    <a href="{% url 'lessons:index' %}" class="active">Lessons</a>
-
-    <a href="{% url 'resources' %}" class="active">Resources</a>
-
-</div>
-
-<div id="main">
-    <span style="font-size:30px;cursor:crosshair;display:inline-block" onclick="openNav()">&#9776;</span>
-
-    <h1>Quiz</h1> {% for quiz in lesson.quiz_set.all %} {% autoescape off %}{{ quiz.question_text }} {% endautoescape %}
-    <BR> {% if error_message %}
-    <p><strong>{{ error_message }}</strong></p>{% endif %}
-    <form name="{{question.lesson_num}}">
-        {% for fill_in in quiz.fill_in_set.all %} {{ fill_in.text }}<br />
-        <textarea>{{ fill_in.text }}</textarea><br />
-    </form>
-    {% endfor %}
-    <BR>
-    <BR> {% endfor %}
-
-</div>
-<button class="accordion"></button>
-<div class="panel">
-    {% for quiz in lesson.quiz_set.all %} {% autoescape off %}{{quiz.answer}} {% endautoescape %} {% endfor %}
-    <BR>
-    <BR>
-    <p align=center><a href="/../lessons/{{lesson.lesson_id}}" class="backbutton"><span><font-size=14px>Return to Previous Lesson</font></span></a>
-        <a href="/../lessons/{{lesson.lesson_id|add:" 1 "}}" class="button"><span><font-size=14px>Next Lesson</font></span></a>
-        <BR>
-        <BR>
-</div>
-
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-
+  return false; // required to not refresh the page; just leave this here
+  } //this ends the submit function
+  </script>
 <script>
     var acc = document.getElementsByClassName("accordion");
     var i;
@@ -78,3 +88,4 @@
         }
     }
 </script>
+{% endblock %}

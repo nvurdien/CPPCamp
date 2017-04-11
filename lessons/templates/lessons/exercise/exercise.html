@@ -2,38 +2,27 @@
 {% block content %}
 <h1>Exercise</h1>
 <form id="exercise">
-    {% for question in lesson.question_set.all %} {% autoescape off %}{{ question.question_text }} {% endautoescape %}
+    {% for question in lesson.question_set.all %} {% autoescape off %}{{question.lesson_num}}. {{ question.question_text }} {% endautoescape %}
     <BR> {% for choice in question.choice_set.all %} {% if choice.answer %}
     <input type="radio" name="question{{question.pk}}" value=1 />{% autoescape off %}{{ choice.choice_text }}{% endautoescape %}
     <BR> {% else %}
     <input type="radio" name="question{{question.pk}}" value=0 />{% autoescape off %}{{ choice.choice_text }}{% endautoescape %}
     <BR> {% endif %}
     <!--<label for="{{question.pk}}choice{{ forloop.counter }}"></label><br />-->
-
     {% endfor %}
+    <button class="hint"></button>
+    <div class="panel">
+       {% autoescape off %}{{question.hint}} {% endautoescape %}
+    </div>
     <BR> {% endfor %}
     <BR>
     <BR>
-    <input type="submit" value="Submit" />
+    <input type="button" id="submit" value="Submit">
     <BR>
     <BR>
 </form>
+<p id="grade"></p>
 </div>
-
-<p id="grade">Your grade is: </p>
-
-<button class="accordion"></button>
-<div class="panel">
-    {% for question in lesson.question_set.all %} {% autoescape off %}{{question.answer}} {% endautoescape %} {% endfor %}
-    <BR>
-    <BR>
-    <p align=center><a href="/../lessons/{{lesson.lesson_id}}" class="backbutton"><span><font-size=14px>Return to Lesson</font></span></a>
-        <a href="/../lessons/quiz/{{lesson.lesson_id}}" class="button"><span><font-size=14px>Quiz {{lesson.lesson_id}}</font></span></a>
-        <BR>
-        <BR>
-
-</div>
-
 <BR>
 <BR>
 <BR>
@@ -45,31 +34,80 @@
 <BR>
 <BR>
 <BR>
-<script type='text/javascript'>
-    document.getElementById("exercise").onsubmit = function() {
-    result = 0
-    { % for question in lesson.question_set.all % }
-    result += parseInt(document.querySelector('input[name = "question{{question.pk}}"]:checked').value);
-    count++;
-    { % endfor % }
-    document.getElementById("grade").innerHTML = results;
-    return false; // required to not refresh the page; just leave this here
-    }; //this ends the submit function
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-        acc[i].onclick = function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        }
+<BR>
+<BR>
+<BR>
+  <script>
+  document.getElementById("submit").onclick = function() {
+  var result=0;
+  var corrections = new Array();
+  var count=0;
+  var i=0;
+  {% for question in lesson.question_set.all %}
+  if(parseInt(document.querySelector('input[name = "question{{question.pk}}"]:checked').value) != 1)
+  {
+  corrections[i] = "<BR>{{question.lesson_num}}"+". "+"{% autoescape off %}{{question.answer}} {% endautoescape %}";
+  i++;
+  }
+  else {
+    result++;
+  }
+  count++;
+  {% endfor %}
+  if(result/count*100 < 75){
+  document.getElementById("grade").innerHTML = "You got "+result+"/"+count+". Please retake the exercise!";
+  for(j=0; j < corrections.length; j++)
+  {
+    document.getElementById("grade").innerHTML += corrections[j];
+  }
+  document.getElementById("grade").innerHTML += "<BR><BR><BR><BR><BR><BR>";
+  document.getElementById("grade").innerHTML += "<BR><p align=center><a href="+"/../lessons/{{lesson.lesson_id}}"+ " class="+"backbutton"+"><span><font-size=14px>Return to Lesson</font></span></a>";
+}
+  else
+  {
+    document.getElementById("grade").innerHTML = "You got "+result+"/"+count+". Good Job! If you would like to retake the test please choose different choices then hit submit!";
+    for(j=0; j < corrections.length; j++)
+    {
+      document.getElementById("grade").innerHTML += corrections[j];
     }
-</script>
+    document.getElementById("grade").innerHTML += "<BR><BR><BR><BR><BR><BR>";
+    document.getElementById("grade").innerHTML += "<BR><p align=center><a href="+"/../lessons/{{lesson.lesson_id}}"+ " class="+"backbutton"+"><span><font-size=14px>Return to Lesson</font></span></a>"+"<a href="+" /../lessons/quiz/{{lesson.lesson_id}} "+ " class="+"\"button\""+"><span><font-size=14px>Quiz {{lesson.lesson_id}}</font></span></a>";
+  }
 
-<div>
+  return false; // required to not refresh the page; just leave this here
+  } //this ends the submit function
+  </script>
+  <script>
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+      acc[i].onclick = function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+          } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+      }
+  }
+</script>
+<script>
+  var hin = document.getElementsByClassName("hint");
+  var j;
+  for (j = 0; j < hin.length; j++) {
+      hin[j].onclick = function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+          } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+
+          return false;
+      }
+  }
+  </script>
 {% endblock %}
