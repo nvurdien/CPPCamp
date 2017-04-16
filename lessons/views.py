@@ -31,14 +31,13 @@ class AboutUsPageView(TemplateView):
         context = super(AboutUsPageView, self).get_context_data(**kwargs)
         return context
 
-class IndexView(LoginRequiredMixin,generic.ListView):
-    redirect_to = 'lesons/'
+class IndexView(generic.ListView):
     template_name = 'lessons/index.html'
     context_object_name = 'latest_lesson_list'
     def get_queryset(self):
         return Lesson.objects.order_by('lesson_id')
 
-class DetailView(LoginRequiredMixin,generic.DetailView):
+class DetailView(generic.DetailView):
     model = Lesson
     template_name = 'lessons/detail.html'
     def get_queryset(self):
@@ -71,13 +70,13 @@ def logged_in(request):
         redirect_to = "/"
     return HttpResponseRedirect(redirect_to)
 
-@login_required
+
 def index(request):
     latest_lesson_list = Lesson.objects.order_by('-lesson_id')
     context = {'latest_lesson_list': latest_lesson_list}
     return render(request, 'lessons/index.html', context)
 
-@login_required
+
 def detail(request, lesson_id):
     lesson = get_object_or_404(Lesson, pk=lesson_id)
     return render(request, 'lessons/detail.html', {'lessons': lesson})
