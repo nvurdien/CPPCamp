@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 {% if user.is_authenticated %}
-<h2> Welcome Back {{ user.username }}!</h2>
+<h1> Welcome Back {{ user.first_name }} {{user.last_name}}!</h1>
 <BR>
 <p>Our purpose is to ensure that high school students have a means of supplementing their computer science education as well as inspiring them to follow a path related to computer science.
     <BR> In the Lessons tab, we cover the basics ranging from Hello World to variables. As we implement more features into the site, the content in the lessons will improve significantly.

@@ -25,6 +25,12 @@ class ResourcePageView(TemplateView):
         context = super(ResourcePageView, self).get_context_data(**kwargs)
         return context
 
+class AboutUsPageView(TemplateView):
+    template_name = 'about/AboutUs.html'
+    def get_context_data(self, **kwargs):
+        context = super(AboutUsPageView, self).get_context_data(**kwargs)
+        return context
+
 class IndexView(LoginRequiredMixin,generic.ListView):
     redirect_to = 'lesons/'
     template_name = 'lessons/index.html'

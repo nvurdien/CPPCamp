@@ -55,7 +55,7 @@
   {
     document.getElementById("grade").innerHTML += corrections[j];
   }*/
-  document.getElementById("grade").innerHTML += "<BR><p align=center><a href="+"/../lessons/{{lesson.lesson_id}}"+ " class="+"backbutton"+"><span><font-size=14px>Return to Lesson</font></span></a>";
+  document.getElementById("grade").innerHTML += "<BR><p align=center><a href="+"/../lessons/{{lesson.lesson_id}}"+ " class="+"backbutton"+"><span><font-size=14px>Return to Lesson</font></span></a>"+"<a href="+" /../lessons/quiz/{{lesson.lesson_id}} "+ " class="+"\"midbutton\""+"><span><font-size=14px>Retake</font></span></a>";
 }
   else
   {
@@ -66,7 +66,7 @@
     }
 
     document.getElementById("grade").innerHTML += "<BR><BR><BR><BR><BR><BR>";
-    document.getElementById("grade").innerHTML += "<BR><p align=center><a href="+"/../lessons/{{lesson.lesson_id}}"+ " class="+"backbutton"+"><span><font-size=14px>Return to Lesson</font></span></a>"+"<a href="+"/../lessons/{{lesson.lesson_id|add:1}}"+" class="+"button"+"><span><font-size=14px>Next Lesson</font></span></a>";
+    document.getElementById("grade").innerHTML += "<BR><p align=center><a href="+"/../lessons/{{lesson.lesson_id}}"+ " class="+"backbutton"+"><span><font-size=14px>Return to Lesson</font></span></a>"+"<a href="+" /../lessons/quiz/{{lesson.lesson_id}} "+ " class="+"\"midbutton\""+"><span><font-size=14px>Retake</font></span></a>"+"<a href="+"/../lessons/{{lesson.lesson_id|add:1}}"+" class="+"button"+"><span><font-size=14px>Next Lesson</font></span></a>";
   }
 
   return false; // required to not refresh the page; just leave this here

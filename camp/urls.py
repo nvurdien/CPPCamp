@@ -19,13 +19,14 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import TemplateView
-from lessons.views import HomePageView, ResourcePageView
+from lessons.views import HomePageView, ResourcePageView, AboutUsPageView
 
 urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'logged_out.html'}, name='logout'),
     #url('^', include('django.contrib.auth.urls')),
     url(r'^$', HomePageView.as_view(), name = 'home'),
+    url(r'^about/', AboutUsPageView.as_view(), name = 'about'),
     url(r'^resources/', ResourcePageView.as_view(), name = 'resources'),
     url(r'^lessons/', include('lessons.urls')),
     url(r'^admin/', admin.site.urls),

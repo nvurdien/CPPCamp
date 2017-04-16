@@ -16,11 +16,12 @@
 
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="{% url 'home' %}" class="active">Home</a> {% if user.is_authenticated %}
+    <a href="{% url 'home' %}" class="active">Home</a>
+    <a href="{% url 'about' %}" class="active">About Us</a>
+     {% if user.is_authenticated %}
     <a href="{% url 'logout' %}" class="active">Log Out</a> {% else %}
     <a href="{% url 'login' %}" class="active">Login</a> {% endif %}
     <a href="{% url 'lessons:index' %}" class="active">Lessons</a>
-
     <a href="{% url 'resources' %}" class="active">Resources</a>
 
 </div>

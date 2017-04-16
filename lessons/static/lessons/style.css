@@ -80,6 +80,29 @@ pre {
 
 /* Don't touch anything below this please */
 
+.midbutton {
+    border-radius: 4px;
+    background-color: gray !important;
+    border: none;
+    color: white !important;
+    text-align: center;
+    text-decoration: none !important;
+    font-size: 16px;
+    padding: 20px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: crosshair;
+    margin: 5px;
+}
+
+.midbutton span {
+    cursor: crosshair;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+    text-decoration: none !important;
+}
+
 .button {
     border-radius: 4px;
     background-color: gray !important;

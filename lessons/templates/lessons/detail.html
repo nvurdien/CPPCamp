@@ -11,5 +11,10 @@
     <p><label for="entry{{ forloop.counter }}">{% autoescape off %}{{ entry.lesson_text }}{% endautoescape %}</label><br /></p>
 {% endfor %}
 <p align=right><a href="/../lessons/exercise/{{lesson.lesson_id}}" class="button"><span><font-size=14px>Next</font></span></a>
-
+</div>
+<div id="mySidenav2" class="sidenav2">
+ {% for entry in lesson.entry_set.all %}
+ <a href=#{{entry.lesson_header}}>{{entry.lesson_header}}</a>
+ {% endfor %}
+ </div>
 {% endblock %}
