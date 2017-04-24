@@ -24,8 +24,8 @@ SECRET_KEY = 'l$0)&6q8wezf$8$890gqu^8!7=yniw&b+xc%w(e-56+q5uvkr-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = ['cppcamp.herokuapp.com', u'localhost']
 
-ALLOWED_HOSTS = ['cppcamp.herokuapp.com']
 
 
 # Application definition
@@ -44,11 +44,9 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',  #Manages sessions across requests
     'django.contrib.auth.middleware.AuthenticationMiddleware',  #Associates users with requests using sessions.
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
