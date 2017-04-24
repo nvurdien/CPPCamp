@@ -2,6 +2,9 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.html import format_html
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -26,6 +29,7 @@ class Entry(models.Model):
     mod_date = models.DateField()
     def __self__(self):
         return self.lesson_header
+
 class Question(models.Model):
     question_text = models.TextField()
     pub_date = models.DateTimeField('date published')
@@ -56,7 +60,6 @@ class Quiz(models.Model):
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True
     was_published_recently.short_description = 'Published recently?'
-
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)

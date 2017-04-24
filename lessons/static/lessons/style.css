@@ -22,7 +22,6 @@ a:hover {
     text-decoration: underline;
     text-transform: ;
     font-family: Arial;
-    cursor: crosshair;
     font-size: ;
 }
 
@@ -91,12 +90,10 @@ pre {
     padding: 20px;
     width: 100px;
     transition: all 0.5s;
-    cursor: crosshair;
     margin: 5px;
 }
 
 .midbutton span {
-    cursor: crosshair;
     display: inline-block;
     position: relative;
     transition: 0.5s;
@@ -114,12 +111,10 @@ pre {
     padding: 20px;
     width: 100px;
     transition: all 0.5s;
-    cursor: crosshair;
     margin: 5px;
 }
 
 .button span {
-    cursor: crosshair;
     display: inline-block;
     position: relative;
     transition: 0.5s;
@@ -160,12 +155,10 @@ pre {
     padding: 20px;
     width: 100px;
     transition: all 0.5s;
-    cursor: crosshair;
     margin: 5px;
 }
 
 .backbutton span {
-    cursor: crosshair;
     display: inline-block;
     position: relative;
     transition: 0.5s;

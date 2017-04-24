@@ -19,12 +19,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import TemplateView
-from lessons.views import HomePageView, ResourcePageView, AboutUsPageView
+from lessons.views import *
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
-
 urlpatterns = [
-    url('^register/', CreateView.as_view(template_name='register.html', form_class=UserCreationForm, success_url='/')),
+    url(r'^register/$', register_page),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'logged_out.html'}, name='logout'),
     url('^', include('django.contrib.auth.urls')),

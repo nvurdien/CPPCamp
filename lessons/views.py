@@ -1,9 +1,7 @@
-from django.shortcuts import render
-
 # Create your views here.
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import loader, RequestContext
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404, render_to_response
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
@@ -11,9 +9,11 @@ from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
-
-
+from django.contrib.auth import login, authenticate
+from .forms import *
 from .models import Lesson, Entry, Question, Choice
+
+
 
 class HomePageView(TemplateView):
     template_name = 'home.html'
@@ -61,6 +61,21 @@ class QuizDetail(generic.DetailView):
     template_name = 'lessons/quiz/quiz.html'
     def get_queryset(self):
         return Lesson.objects.order_by('lesson_id')
+
+
+def register_page(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/')
+    else:
+        form = RegistrationForm()
+    return render(request, 'register.html', {'form': form})
 
 @login_required
 def logged_in(request):
