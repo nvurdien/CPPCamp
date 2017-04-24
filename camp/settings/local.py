@@ -25,7 +25,7 @@ SECRET_KEY = 'l$0)&6q8wezf$8$890gqu^8!7=yniw&b+xc%w(e-56+q5uvkr-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cppcamp.herokuapp.com']
 
 
 # Application definition
