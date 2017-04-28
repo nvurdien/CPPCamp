@@ -1,7 +1,7 @@
 # Create your views here.
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import loader, RequestContext
-from django.shortcuts import render, get_object_or_404, get_list_or_404, render_to_response
+from django.shortcuts import render, get_object_or_404, get_list_or_404, render_to_response, redirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
@@ -72,7 +72,7 @@ def register_page(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('/')
+            return redirect('home')
     else:
         form = RegistrationForm()
     return render(request, 'register.html', {'form': form})

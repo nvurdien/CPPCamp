@@ -8,11 +8,11 @@ from django.dispatch import receiver
 
 # Create your models here.
 
-
 class Lesson(models.Model):
     name = models.CharField(max_length=100)
     lesson_id = models.IntegerField()
     pub_date = models.DateTimeField('date published')
+    user = models.ForeignKey(User)
     def __str__(self):
         return self.name
     def was_published_recently(self):
@@ -23,7 +23,7 @@ class Lesson(models.Model):
     was_published_recently.short_description = 'Published recently?'
 
 class Entry(models.Model):
-    lesson = models.ForeignKey(Lesson)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     lesson_header = models.CharField(max_length=100)
     lesson_text = models.TextField()
     mod_date = models.DateField()
@@ -34,9 +34,10 @@ class Question(models.Model):
     question_text = models.TextField()
     pub_date = models.DateTimeField('date published')
     lesson_num = models.IntegerField()
-    lesson = models.ForeignKey(Lesson)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     answer = models.TextField()
     hint = models.TextField()
+    score = models.IntegerField()
     def __str__(self):
         return self.question_text
     def was_published_recently(self):
@@ -50,8 +51,9 @@ class Quiz(models.Model):
     question_text = models.TextField()
     pub_date = models.DateTimeField('date published')
     lesson_num = models.IntegerField()
-    lesson = models.ForeignKey(Lesson)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     answer = models.TextField()
+    score = models.IntegerField()
     def __str__(self):
         return self.question_text
     def was_published_recently(self):

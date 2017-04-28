@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
 # Register your models here.
-from .models import Question, Choice, Lesson, Entry, Choice2, Quiz
+from .models import *
 
 class EditLinkToInlineObject(object):
     def edit_link(self, instance):
@@ -45,7 +45,6 @@ class LessonAdmin(admin.ModelAdmin):
     inlines = [EntryInLine,QuestionInLine,QuizInLine]
     list_display = ('name', 'lesson_id', 'pub_date')
     search_fields = ['name']
-
 
 admin.site.register(Quiz, QuizAdmin)
 admin.site.register(Question, QuestionAdmin)

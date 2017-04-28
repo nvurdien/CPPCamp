@@ -15,6 +15,7 @@
         {% endfor %}
       </p>
 {% endfor %}
-<input type="submit" value="Create new user account" />
+<input type="submit" value="Register" />
+<input type="hidden" name="next" value="{% url 'home' %}" />
 </form>
 {% endblock %}

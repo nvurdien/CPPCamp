@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['cppcamp.herokuapp.com', u'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'password_reset'
     'lessons.apps.LessonsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -127,3 +128,11 @@ STATICFILES_DIRS = [
 LOGIN_URL = '/login/'
 
 LOGIN_REDIRECT_URL = 'home'
+
+if DEBUG:
+    EMAIL_HOST = 'localhost'
+    EMAIL_PORT = 1025
+    EMAIL_HOST_USER = 'cppcamp'
+    EMAIL_HOST_PASSWORD = ''
+    EMAIL_USE_TLS = False
+    DEFAULT_FROM_EMAIL = 'donotreply@cppcamp.com'
