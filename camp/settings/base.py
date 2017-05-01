@@ -24,7 +24,7 @@ SECRET_KEY = 'l$0)&6q8wezf$8$890gqu^8!7=yniw&b+xc%w(e-56+q5uvkr-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['cppcamp.herokuapp.com', u'localhost']
+ALLOWED_HOSTS = ['cppcamp.herokuapp.com', u'localhost', u'127.0.0.1']
 
 
 
@@ -129,10 +129,11 @@ LOGIN_URL = '/login/'
 
 LOGIN_REDIRECT_URL = 'home'
 
-if DEBUG:
-    EMAIL_HOST = 'localhost'
-    EMAIL_PORT = 1025
-    EMAIL_HOST_USER = 'cppcamp'
-    EMAIL_HOST_PASSWORD = ''
-    EMAIL_USE_TLS = False
-    DEFAULT_FROM_EMAIL = 'donotreply@cppcamp.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'cppcamp@gmail.com'
+EMAIL_HOST_PASSWORD = 'cppnotebook'
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER 

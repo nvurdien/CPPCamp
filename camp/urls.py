@@ -21,9 +21,8 @@ from django.contrib.auth import views as auth_views
 from django.views.generic.base import TemplateView
 from lessons.views import *
 from django.views.generic.edit import CreateView
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import *
 urlpatterns = [
-    url(r'^password_reset/', include('password_reset.urls')),
     url(r'^register/$', register_page),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'logged_out.html'}, name='logout'),

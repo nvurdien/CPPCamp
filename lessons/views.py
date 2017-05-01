@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import login, authenticate
 from .forms import *
-from .models import Lesson, Entry, Question, Choice
+from .models import *
 
 
 
@@ -84,6 +84,7 @@ def logged_in(request):
     except ValueError:
         redirect_to = "/"
     return HttpResponseRedirect(redirect_to)
+
 
 
 def index(request):
