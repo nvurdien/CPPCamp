@@ -9,5 +9,5 @@ wsgiref==0.1.2
 whitenoise==3.3.0
 django-password-reset==0.9
 django-widget-tweaks==1.4.1
-django-bootstrap-u
+django-bootstrap-ui
 django-crispy-forms
