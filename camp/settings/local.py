@@ -31,6 +31,9 @@ ALLOWED_HOSTS = ['cppcamp.herokuapp.com', u'localhost', u'127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'widget_tweaks',
+    'crispy_forms',
+    'bootstrap_ui',
     'lessons.apps.LessonsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -136,4 +139,5 @@ EMAIL_HOST_USER = 'cppcamp@gmail.com'
 EMAIL_HOST_PASSWORD = 'cppnotebook'
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-SERVER_EMAIL = EMAIL_HOST_USER 
+SERVER_EMAIL = EMAIL_HOST_USER
+DJANGO_BOOTSTRAP_UI_THEME = 'bootswatch-paper'

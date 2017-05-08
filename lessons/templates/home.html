@@ -1,25 +1,269 @@
 {% extends "base.html" %}
+{% block title %} Homepage {% endblock %}
 {% block content %}
-{% if user.is_authenticated %}
-<h1> Welcome Back {{ user.first_name }} {{user.last_name}}!</h1>
-<BR>
-<p>Our purpose is to ensure that high school students have a means of supplementing their computer science education as well as inspiring them to follow a path related to computer science.
-    <BR> In the Lessons tab, we cover the basics ranging from Hello World to variables. As we implement more features into the site, the content in the lessons will improve significantly.
-    <BR> In the Resources tab, we have included links to IDEs as well as additional sites that can help with learning more about the basics.
-    <BR>
-</p>
-<BR>
-<BR>
-<a href="{% url 'lessons:index' %}" class="button"><span>Click to Go to the Lessons Page</span></a>
-{% else %}
-<h1> Welcome to CPP Camp</h1>
-<p>Our purpose is to ensure that high school students have a means of supplementing their computer science education as well as inspiring them to follow a path related to computer science.
-    <BR> In the Lessons tab, we cover the basics ranging from Hello World to variables. As we implement more features into the site, the content in the lessons will improve significantly.
-    <BR> In the Resources tab, we have included links to IDEs as well as additional sites that can help with learning more about the basics.
-    <BR>
-</p>
-<BR>
-<BR>
-<a href="{% url 'lessons:detail' 1 %}" class="button"><span>Click to Get Started</span></a>
-{% endif %}
+<title>CPP Camp::Home</title>
+<nav class="navbar navbar-ct-orange navbar-fixed-top" role="navigation" style="background-color:black">
+    <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button id="menu-toggle" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainnav">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar bar1"></span>
+        <span class="icon-bar bar2"></span>
+        <span class="icon-bar bar3"></span>
+      </button>
+      <a class="navbar-brand" href="#">CPP Camp</a><center>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+
+    <div class="collapse navbar-transparent navbar-collapse" id="mainnav">
+      <ul class="nav navbar-nav navbar-right">
+            <li class="active">
+                <a href="/">
+                     Home
+                </a>
+            </li>
+            <li class="Lessons">
+                  <a href="/lessons/" class="dropdown-toggle" data-toggle="dropdown">
+                    Lessons
+                    <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                        <a href="/lessons/">
+                            Index
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lessons/1/">
+                            Hello World
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lessons/2/">
+                            Basic Syntax
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lessons/3/">
+                            Data & Variable Types
+                        </a>
+                    </li>
+                  </ul>
+            </li>
+            <li>
+                <a href="/resources/">
+                     Resources
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li><a href="/logout/" class="btn btn-round btn-default">Sign-Out</a></li>
+            {% else %}
+            <li><a href="/login/" class="btn btn-round btn-default">Sign-in</a></li>
+            <li><a href="/register/">Register</a></li>
+            {% endif %}
+       </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<body>
+  <div class="bgimg-1">
+    <div class="caption" style="background-color:white"><span class="border">{% if user.is_authenticated %}
+      <h3 class="text-center">Welcome back {{user.first_name}} {{user.last_name}}<BR>
+      <small class="subtitle">Learn C++</small></h3>
+      {% else %}
+      <h3 class="text-center">Welcome to CPP Camp<BR>
+      <small class="subtitle">Where you learn C++</small></h3>
+      {% endif %}</span>
+      </div>
+  </div>
+
+<div class="section section-description">
+       <div class="container" style="display:table;margin: 0 auto;">
+          <h2 class="section-title">About Us</h2>
+          <div class="row" style="text-align:center; text-align:justify;">
+                <p>
+                  We are the <b><i>Code Campers</i></b>!!!<BR>
+                  CPP Camp so far is made up of three main components: homepage, lessons, and resources.
+                  The homepage of our website is designed to give a description of CPP Camp and allow newer users to start learning quickly and efficiently.
+                  The lessons tab is where the magic of CPP Camp happens; it is where students get to view our custom lessons, exercises, and quizzes.
+                  And finally, the resources tab is meant to provide students with the resources that they need to succeed in addition to our curriculum.
+                  For the second iteration, CPP camp will be focusing on the following features of which we have identified as high priority.
+                  In the current market, our product will stand out from others based on our unique vision of computer programming curriculum.
+                  It should be easy to access, easy to learn, and inspire creativity.
+                  Beginner students should feel comfortable going through the lesson plans and be inspired to code on their own.
+                </p>
+      </div>
+      </div>
+    </div>
+    <div class="bgimg-2">
+    </div>
+<div class="section section-gray">
+        <div class="container">
+            <h2 class="section-title">Meet our Team</h2>
+            <div class="team-presentation">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-user">
+                            <div class="image">
+                                <img src="https://www.goodfreephotos.com/albums/united-states/wisconsin/southern-wisconsin/southern-wisconsin-further-roadway-scenery-at-sunset.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="author">
+                                    <a href="https://www.linkedin.com/in/nvurdien/">
+                                    <img class="avatar" src="static/lessons/img/DSCF3776.jpg" alt="...">
+                                    <h4 class="title">Navie Vurdien<br>
+                                        <small>Lead Programmer/Designer</small>
+                                    </h4>
+                                    </a>
+                                </div>
+                                <p class="description text-center">
+                                    <i class="fa fa-map-marker fa-fw text-muted"></i> Fullerton, California <br>
+                                    <i class="fa fa-building-o fa-fw text-muted"></i> California State University, Fullerton <br>
+                                    <i class="fa fa-envelope-o fa-fw text-muted"></i> <a href=mailto:nvurdien@gmail.com >nvurdien@gmail.com</a>
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <a href="http://github.com/nvurdien" target="_blank"><button class="btn btn-social btn-github btn-simple"><i class="fa fa-github"></i></button></a>
+                                <a href="https://www.linkedin.com/in/nvurdien/" target="_blank"><button class="btn btn-social btn-linkedin-square btn-simple"><i class="fa fa-linkedin-square"></i></button></a>
+                            </div>
+                        </div> <!-- end card-->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-user">
+                            <div class="image">
+                                <img src="static/lessons/img/bg2.jpeg">
+                            </div>
+                            <div class="content">
+                                <div class="author">
+                                    <a href="#">
+                                        <img class="avatar" src="static/lessons/img/DSCF3772.jpg" alt="...">
+                                        <h4 class="title">Steven Espin<br>
+                                            <small>Scrum Master</small>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <p class="description text-center">
+                                    <i class="fa fa-map-marker fa-fw text-muted"></i> Fullerton, California <br>
+                                    <i class="fa fa-building-o fa-fw text-muted"></i> California State University, Fullerton <br>
+                                    <i class="fa fa-envelope-o fa-fw text-muted"></i> <a href=mailto:sespin@csu.fullerton.com >sespin@csu.fullerton.com</a>
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                              <a href="" target="_blank"><button class="btn btn-social btn-github btn-simple"><i class="fa fa-github"></i></button></a>
+                            </div>
+                        </div> <!-- end card -->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-user">
+                            <div class="image">
+                                <img src="static/lessons/img/bg3.jpeg">
+                            </div>
+                            <div class="content">
+                                <div class="author">
+                                    <a href="#">
+                                        <img class="avatar" src="static/lessons/img/DSCF3769.jpg" alt="...">
+                                        <h4 class="title">Cesar Carrillo<br>
+                                            <small>Business Analyst</small>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <p class="description text-center">
+                                    <i class="fa fa-map-marker fa-fw text-muted"></i> Fullerton, California <br>
+                                    <i class="fa fa-building-o fa-fw text-muted"></i> California State University, Fullerton <br>
+                                    <i class="fa fa-envelope-o fa-fw text-muted"></i> <a href=mailto:cesar8@csu.fullerton.edu>cesar8@csu.fullerton.edu</a>
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                              <a href="" target="_blank"><button class="btn btn-social btn-github btn-simple"><i class="fa fa-github"></i></button></a>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-user">
+                            <div class="image">
+                                <img src="static/lessons/img/bg3.jpeg">
+                            </div>
+                            <div class="content">
+                                <div class="author">
+                                    <a href="#">
+                                        <img class="avatar" src="static/lessons/img/DSCF3782.jpg" alt="...">
+                                        <h4 class="title">Huy Dao<br>
+                                            <small>Programmer</small>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <p class="description text-center">
+                                    <i class="fa fa-map-marker fa-fw text-muted"></i> Fullerton, California <br>
+                                    <i class="fa fa-building-o fa-fw text-muted"></i> California State University, Fullerton <br>
+                                    <i class="fa fa-envelope-o fa-fw text-muted"></i> <a href=mailto:hgdao@csu.fullerton.edu>hgdao@csu.fullerton.edu</a>
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                              <a href="" target="_blank"><button class="btn btn-social btn-github btn-simple"><i class="fa fa-github"></i></button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="card card-user">
+                            <div class="image">
+                                <img src="static/lessons/img/city.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="author">
+                                    <a href="#">
+                                        <img class="avatar" src="static/lessons/img/DSCF3774.jpg" alt="...">
+                                        <h4 class="title">Elmer Sevillano<br>
+                                            <small>Programmer</small>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <p class="description text-center">
+                                    <i class="fa fa-map-marker fa-fw text-muted"></i> Fullerton, California <br>
+                                    <i class="fa fa-building-o fa-fw text-muted"></i> California State University, Fullerton <br>
+                                    <i class="fa fa-envelope-o fa-fw text-muted"></i> <a href=mailto:esevillano@csu.fullerton.edu>esevillano@csu.fullerton.edu</a>
+                                </p>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                              <a href="" target="_blank"><button class="btn btn-social btn-github btn-simple"><i class="fa fa-github"></i></button></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bgimg-3">
+    </div>
+    <div class="section section-description">
+           <div class="container" style="display:table;margin: 0 auto;">
+               <h2 class="section-title">Purpose</h2>
+               <div class="row">
+    <p>Our purpose is to ensure that high school students have a means of supplementing their computer science education as well as inspiring them to follow a path related to computer science.
+        <BR> In the Lessons tab, we cover the basics ranging from Hello World to variables. As we implement more features into the site, the content in the lessons will improve significantly.
+        <BR> In the Resources tab, we have included links to IDEs as well as additional sites that can help with learning more about the basics.
+        <BR></p>
+          </div>
+        </div>
+      </div>
+      <div class="bgimg-1">
+        <div class="col-sm-offset-6" style="display:table;margin: 0 auto;"><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+          {% if user.is_authenticated %}
+          <a href="{% url 'lessons:index'%}">
+            <button class="btn btn-block btn-fill btn-lg btn-default" style="background-color:black">Click to go to the Lessons Page »</button></a>
+            {% else %}
+            <a href="{% url 'lessons:detail' 1 %}">
+              <button class="btn btn-block btn-lg btn-fill btn-default" style="background-color:black">Click to Get Started »</button></a>
+              {% endif %}
+          </div>
+      </div>
+</body>
 {% endblock %}

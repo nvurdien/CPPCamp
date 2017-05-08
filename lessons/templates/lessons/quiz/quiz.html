@@ -1,45 +1,70 @@
 {% extends "base.html" %}
-{% block content %}
-<h1>Quiz</h1>
-<form id="quiz">
+{% block content %}<BR><BR>
+<body><div class="wrapper">
+  <div class="section section-description">
+         <div class="container">
+             <h2 class="section-title">Quiz</h2>
+  <h4 class="text-left"><form id="quiz">
 {% for quiz in lesson.quiz_set.all %} {% autoescape off %}{{quiz.lesson_num}}. {{ quiz.question_text }} {% endautoescape %}
 <BR> {% for choice2 in quiz.choice2_set.all %} {% if choice2.answer %}
-<input type="radio" name="quiz{{quiz.pk}}" value=1 />{% autoescape off %}{{ choice2.choice_text }}{% endautoescape %}
-<BR> {% else %}
-<input type="radio" name="quiz{{quiz.pk}}" value=0 />{% autoescape off %}{{ choice2.choice_text }}{% endautoescape %}
-<BR> {% endif %}
+  <label class="radio">
+    <span class="icons">
+    <span class="first-icon fa fa-circle-o"></span>
+    <span class="second-icon fa fa-dot-circle-o"></span>
+  </span>
+  <input type="radio" name="quiz{{quiz.pk}}" data-toggle="radio" value=1 />
+{% autoescape off %}{{ choice2.choice_text }}{% endautoescape %}
+</label> {% else %}
+<label class="radio">
+  <span class="icons">
+  <span class="first-icon fa fa-circle-o"></span>
+  <span class="second-icon fa fa-dot-circle-o"></span>
+</span>
+<input type="radio" name="quiz{{quiz.pk}}" id="optionsRadios2" data-toggle="radio" value=0/>
+{% autoescape off %}{{ choice2.choice_text }}{% endautoescape %}
+</label> {% endif %}
 <!--<label for="{{question.pk}}choice{{ forloop.counter }}"></label><br />-->
 {% endfor %}
-<BR> {% endfor %}
-    <BR>
-    <BR>
-    <input type="button" id="submit" value="Submit">
-    <BR>
-    <BR>
+{% endfor %}
+  <div class="col-sm-offset-6" style="display:table;margin: 0 auto;">
+    <input type="button" class="btn btn-block btn-round btn-fill btn-default" id="submit" value="Submit">
+  </div>
+  </h4>
 </form>
 <p id="grade"></p>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Hey!</h4>
+        </div>
+        <div class="modal-body" id="grade2">
+          <p>You have not answered a question 😱, please go back and answer it and then you may submit. 😊</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
   <script>
   document.getElementById("submit").onclick = function() {
   var result=0;
   var corrections = new Array();
   var count=0;
   var i=0;
+  var nul = false;
+  var notanswered = new Array();
   {% for quiz in lesson.quiz_set.all %}
+  try
+  {
   if(parseInt(document.querySelector('input[name = "quiz{{quiz.pk}}"]:checked').value) != 1)
   {
-  corrections[i] = "<BR>{{quiz.lesson_num}}"+". "+"{% autoescape off %}{{quiz.answer}} {% endautoescape %}";
   i++;
   }
   else {
@@ -48,44 +73,33 @@
     result++;
   }
   count++;
+}
+  catch(err)
+  {
+    $(document).ready(function() {
+      var response = "You have not answered question {{quiz.lesson_num}} 😱, please go back and answer it and then you may submit. 😊";
+      document.getElementById("grade2").innerHTML = response;
+      $('#myModal').modal('show');
+  });
+  count++;
+  return false;
+}
   {% endfor %}
   if(result/count*100 < 75){
-  document.getElementById("grade").innerHTML = "You got "+result+"/"+count+". Please retake the quiz!"+"<BR><BR><BR><BR>";
-  /*for(j=0; j < corrections.length; j++)
-  {
-    document.getElementById("grade").innerHTML += corrections[j];
-  }*/
-  document.getElementById("grade").innerHTML += "<BR><p align=center><a href="+"/../lessons/{{lesson.lesson_id}}"+ " class="+"backbutton"+"><span><font-size=14px>Return to Lesson</font></span></a>"+"<a href="+" /../lessons/quiz/{{lesson.lesson_id}} "+ " class="+"\"midbutton\""+"><span><font-size=14px>Retake</font></span></a>";
-}
-  else
-  {
-    document.getElementById("grade").innerHTML = "You got "+result+"/"+count+". Good Job! If you would like to retake the test please choose different choices then hit submit!"+"<BR><BR><BR><BR>";
-    for(j=0; j < corrections.length; j++)
+    document.getElementById("grade").innerHTML = "You got "+result+"/"+count+". Please retake the quiz!";
+    document.getElementById("grade").innerHTML += "<BR><p align=center><a href="+"/../lessons/{{lesson.lesson_id}}><button class="+ "btn btn-round btn-fill btn-info"+">Return to Lesson</button></a>"+"<a href="+" /../lessons/quiz/{{lesson.lesson_id}}><button class="+ "btn btn-block btn-lg btn-fill btn-info"+">Retake</button></a>";
+  }
+    else
     {
-      document.getElementById("grade").innerHTML += corrections[j];
-    }
-
-    document.getElementById("grade").innerHTML += "<BR><BR><BR><BR><BR><BR>";
-    document.getElementById("grade").innerHTML += "<BR><p align=center><a href="+"/../lessons/{{lesson.lesson_id}}"+ " class="+"backbutton"+"><span><font-size=14px>Return to Lesson</font></span></a>"+"<a href="+" /../lessons/quiz/{{lesson.lesson_id}} "+ " class="+"\"midbutton\""+"><span><font-size=14px>Retake</font></span></a>"+"<a href="+"/../lessons/{{lesson.lesson_id|add:1}}"+" class="+"button"+"><span><font-size=14px>Next Lesson</font></span></a>";
+      document.getElementById("grade").innerHTML = "You got "+result+"/"+count+". Good Job! If you would like to retake the test please choose different choices then hit submit!";
+      for(j=0; j < corrections.length; j++)
+      {
+        document.getElementById("grade").innerHTML += corrections[j];
+      }
+      document.getElementById("grade").innerHTML += "<BR><p align=center><a href="+"/../lessons/{{lesson.lesson_id}}><button class="+ "btn btn-block btn-lg btn-fill btn-info"+">Return to Lesson</button></a>"+"<a href="+" /../lessons/quiz/{{lesson.lesson_id}}><button class="+ "btn btn-block btn-lg btn-fill btn-info"+">Retake</button></a>"+"<a href="+"/../lessons/{{lesson.lesson_id|add:1}}><button class="+ "btn btn-block btn-lg btn-fill btn-info"+">Next Lesson</button></a>"
   }
 
   return false; // required to not refresh the page; just leave this here
   } //this ends the submit function
   </script>
-<script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-        acc[i].onclick = function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        }
-    }
-</script>
 {% endblock %}

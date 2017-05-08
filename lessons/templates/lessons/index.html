@@ -1,33 +1,115 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Lessons</h1> Write something about lessons here.
-<BR>
-<BR>
+<nav class="navbar navbar-ct-orange navbar-fixed-top" role="navigation" style="background-color:black">
+    <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button id="menu-toggle" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainnav">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar bar1"></span>
+        <span class="icon-bar bar2"></span>
+        <span class="icon-bar bar3"></span>
+      </button>
+      <a class="navbar-brand" href="#">CPP Camp</a><center>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+
+    <div class="collapse navbar-transparent navbar-collapse" id="mainnav">
+      <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="/">
+                     Home
+                </a>
+            </li>
+            <li class="Lessons"  class="active">
+                  <a href="/lessons/" class="dropdown-toggle" data-toggle="dropdown">
+                    Lessons
+                    <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li  class="active">
+                        <a href="/lessons/">
+                            Index
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lessons/1/">
+                            Hello World
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lessons/2/">
+                            Basic Syntax
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lessons/3/">
+                            Data & Variable Types
+                        </a>
+                    </li>
+                  </ul>
+            </li>
+            <li>
+                <a href="/resources/">
+                     Resources
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li><a href="/logout/" class="btn btn-round btn-default">Sign-Out</a></li>
+            {% else %}
+            <li><a href="/login/" class="btn btn-round btn-default">Sign-in</a></li>
+            <li><a href="/register/">Register</a></li>
+            {% endif %}
+       </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="bgimg-1">
+  <div class="caption" style="background-color:white"><span class="border">
+    <h3 class="text-center">Lesson Plan</h3>
+
+    </div>
+</div>
+  <div class="section section-description">
+         <div class="container">
+             <h2 class="section-title">Lessons</h2>
+  <h4 class="text-left">Write something about lessons here.
 <BR> {% for lesson in latest_lesson_list %}
 <a href="/../lessons/{{lesson.lesson_id}}">{{lesson.name}}</a>
 <ul>
     {% for entry in lesson.entry_set.all %}
 
-    <li><a href=/../lessons/{{lesson.lesson_id}}/#{{entry.lesson_header}}>{{entry.lesson_header}}</a></li>
+    <li><small><a href=/../lessons/{{lesson.lesson_id}}/#{{entry.lesson_header}}>{{entry.lesson_header}}</a></small></li>
 
     {% endfor %}
-    <li><a href="/../lessons/exercise/{{lesson.lesson_id}}">{{lesson.name}} Exercises</a></li>
-    <li><a href="/../lessons/quiz/{{lesson.lesson_id}}">{{lesson.name}} Quiz</a></li>
+    <li><small><a href="/../lessons/exercise/{{lesson.lesson_id}}">{{lesson.name}} Exercises</a></small></li>
+    <li><small><a href="/../lessons/quiz/{{lesson.lesson_id}}">{{lesson.name}} Quiz</a></small></li>
 </ul>
-<BR> {% endfor %}
+{% endfor %}</h4>
+        </div>
+  </div>
+
+  <div class="section section-description">
+         <div class="container">
+             <h2 class="section-title">Exercises</h2>
+<h4 class="text-left">Write something about exercises here
 <BR>
-<h1>Exercises</h1> Write something about exercises here
+<ul>    {% for lesson in latest_lesson_list %}
+<li><small><a href="/../lessons/exercise/{{lesson.lesson_id}}">{{lesson.name}} Exercises</a></small></li>
+{% endfor %}
+</ul></h4>
+</div>
+</div>
+<div class="section section-description">
+       <div class="container">
+           <h2 class="section-title">Quizzes</h2>
+<h4 class="text-left">Write something about quizzes here
 <BR>
-<BR>
-<BR> {% for lesson in latest_lesson_list %}
-<a href="/../lessons/exercise/{{lesson.lesson_id}}">{{lesson.name}} Exercises</a>
-<BR> {% endfor %}
-<BR>
-<BR>
-<h1>Quizzes</h1> Write something about quizzes here
-<BR>
-<BR>
-<BR> {% for lesson in latest_lesson_list %}
-<a href="/../lessons/quiz/{{lesson.lesson_id}}">{{lesson.name}} Quiz</a>
-<BR> {% endfor %}
+<ul>{% for lesson in latest_lesson_list %}
+<li><small><a href="/../lessons/quiz/{{lesson.lesson_id}}">{{lesson.name}} Quiz</a></small></li>
+{% endfor %}</ul></h4>
+</div>
+</div>
+
 {% endblock %}

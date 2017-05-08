@@ -25,12 +25,6 @@ class ResourcePageView(TemplateView):
         context = super(ResourcePageView, self).get_context_data(**kwargs)
         return context
 
-class AboutUsPageView(TemplateView):
-    template_name = 'about/AboutUs.html'
-    def get_context_data(self, **kwargs):
-        context = super(AboutUsPageView, self).get_context_data(**kwargs)
-        return context
-
 class IndexView(generic.ListView):
     template_name = 'lessons/index.html'
     context_object_name = 'latest_lesson_list'
@@ -84,8 +78,6 @@ def logged_in(request):
     except ValueError:
         redirect_to = "/"
     return HttpResponseRedirect(redirect_to)
-
-
 
 def index(request):
     latest_lesson_list = Lesson.objects.order_by('-lesson_id')

@@ -1,33 +1,221 @@
- {% load static %}
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="{% static 'lessons/img/Linecons_graduation-cap.svg.png' %}">
+	<link rel="icon" type="image/png" href="{% static 'lessons/img/Linecons_graduation-cap.svg.png' %}">
+  <link rel="canonical" href="http://www.creative-tim.com/product/get-shit-done-pro"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-<link rel="stylesheet" type="text/css" href="{% static 'lessons/style.css' %}" />
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "20%";
-        document.getElementById("main").style.marginLeft = "20%";
-    }
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<meta name="viewport" content="width=device-width" />
 
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "20%";
-    }
-</script>
+	<!--     Fonts and icons     -->
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Grand+Hotel|Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <link href="{% static 'lessons/css/pe-icon-7-stroke.css' %}" rel="stylesheet" />
 
+	<!-- CSS Files -->
+    <link href="{% static 'lessons/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lessons/css/gsdk.css' %}" rel="stylesheet"/>
+	<link href="{% static 'lessons/css/demo.css' %}" rel="stylesheet" />
 
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="{% url 'home' %}" class="active">Home</a>
-    <a href="{% url 'about' %}" class="active">About Us</a>
-     {% if user.is_authenticated %}
-    <a href="{% url 'logout' %}" class="active">Log Out</a> {% else %}
-    <a href="{% url 'login' %}" class="active">Login</a> {% endif %}
-    <a href="{% url 'lessons:index' %}" class="active">Lessons</a>
-    <a href="{% url 'resources' %}" class="active">Resources</a>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</head>
 
-</div>
+<nav class="navbar navbar-ct-orange navbar-fixed-top" role="navigation" style="background-color:black">
+    <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button id="menu-toggle" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainnav">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar bar1"></span>
+        <span class="icon-bar bar2"></span>
+        <span class="icon-bar bar3"></span>
+      </button>
+      <a class="navbar-brand" href="#">CPP Camp</a><center>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
 
-<div id="main">
-    <span style="font-size:30px;display:inline-block" onclick="openNav()">&#9776;</span>
+    <div class="collapse navbar-transparent navbar-collapse" id="mainnav">
+      <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="/">
+                     Home
+                </a>
+            </li>
+            <li class="Lessons">
+                  <a href="/lessons/" class="dropdown-toggle" data-toggle="dropdown">
+                    Lessons
+                    <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                        <a href="/lessons/">
+                            Index
+                        </a>
+                    </li>
+										<li>
+                        <a href="/lessons/1/">
+                            Hello World
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lessons/2/">
+                            Basic Syntax
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lessons/3/">
+                            Data & Variable Types
+                        </a>
+                    </li>
+                  </ul>
+            </li>
+            <li>
+                <a href="/resources/">
+                     Resources
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li><a href="/logout/" class="btn btn-round btn-default">Sign-Out</a></li>
+            {% else %}
+            <li><a href="/login/" class="btn btn-round btn-default">Sign-in</a></li>
+            <li><a href="/register/">Register</a></li>
+            {% endif %}
+       </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
 {% block content %}
 {% endblock %}
-</div>
+
+<footer class="footer footer-big">
+        <hr />
+        <div class="copyright" style="display:table;margin: 0 auto;">
+            &copy; 2017 CPP Camp<BR>
+              <small>Performs best on Google Chrome & Mozilla Firefox</small>
+        </div>
+</footer>
+<script type="text/javascript" async="" src="http://tag.marinsm.com/serve/56026dc590a7b5bf54000030.js"></script>
+<script src="{% static 'lessons/js/jquery.js' %}" type="text/javascript"></script>
+<script src="{% static 'lessons/js/jquery-ui.custom.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'lessons/js/bootstrap.js' %}" type="text/javascript"></script>
+
+<!--  Plugins -->
+<script src="{% static 'lessons/js/gsdk-checkbox.js' %}"></script>
+<script src="{% static 'lessons/js/gsdk-morphing.js' %}"></script>
+<script src="{% static 'lessons/js/gsdk-radio.js' %}"></script>
+<script src="{% static 'lessons/js/gsdk-bootstrapswitch.js' %}"></script>
+<script src="{% static 'lessons/js/bootstrap-select.js' %}"></script>
+<script src="{% static 'lessons/js/chartist.min.js' %}"></script>
+<script src="{% static 'lessons/js/jquery.tagsinput.js' %}"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+<!-- GSDK Pro functions -->
+<script src="{% static 'lessons/js/get-shit-done.js' %}"></script>
+
+<script type="text/javascript">
+
+</script>
+
+<div class="popover-filter"></div>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover({ html : true });
+});
+$(document).ready(function() {
+			if($(document).scrollTop() > 260 ) {
+						if(transparent) {
+								transparent = false;
+								$('nav[role="navigation"]').removeClass('navbar-transparent');
+						}
+				} else {
+						if( !transparent ) {
+								transparent = true;
+								$('nav[role="navigation"]').addClass('navbar-transparent');
+						}
+				}
+}, 17);
+
+function debounce(func, wait, immediate) {
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		clearTimeout(timeout);
+		timeout = setTimeout(function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		}, wait);
+		if (immediate && !timeout) func.apply(context, args);
+	};
+};
+
+</script>
+<style>
+body, html {
+  height: 100%;
+  font: 400 15px/1.8 "Lato", sans-serif;
+  color: #777;
+}
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  /* Full height */
+    height: 100%;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.bgimg-1 {
+  background-image: url("https://c1.staticflickr.com/6/5513/14370075880_13469fa02e_b.jpg");
+  min-height: 100%;
+}
+
+.bgimg-2 {
+  background-image: url("{% static 'lessons/img/DSCF3767.jpg' %}");
+  min-height: 400px;
+}
+
+.bgimg-3 {
+  background-image: url("https://c1.staticflickr.com/4/3895/14782749824_038c57e132_b.jpg");
+  min-height: 400px;
+}
+.caption {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+
+h3 {
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font: 20px "Lato", sans-serif;
+  color: #111;
+}
+
+
+/* Turn off parallax scrolling for tablets and phones. Increase the pixels if needed */
+@media only screen and (max-device-width: 1024px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+    }
+}
+</style>

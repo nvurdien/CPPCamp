@@ -1,20 +1,95 @@
 {% extends "base.html" %}
 {% block content %}
+<nav class="navbar navbar-ct-orange navbar-fixed-top" role="navigation" style="background-color:black">
+    <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button id="menu-toggle" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainnav">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar bar1"></span>
+        <span class="icon-bar bar2"></span>
+        <span class="icon-bar bar3"></span>
+      </button>
+      <a class="navbar-brand" href="#">CPP Camp</a><center>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
 
+    <div class="collapse navbar-transparent navbar-collapse" id="mainnav">
+      <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="/">
+                     Home
+                </a>
+            </li>
+            <li class="Lessons"  class="active">
+                  <a href="/lessons/" class="dropdown-toggle" data-toggle="dropdown">
+                    Lessons
+                    <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                        <a href="/lessons/">
+                            Index
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lessons/1/">
+                            Hello World
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lessons/2/">
+                            Basic Syntax
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lessons/3/">
+                            Data & Variable Types
+                        </a>
+                    </li>
+                  </ul>
+            </li>
+            <li>
+                <a href="/resources/">
+                     Resources
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li><a href="/logout/" class="btn btn-round btn-default">Sign-Out</a></li>
+            {% else %}
+            <li><a href="/login/" class="btn btn-round btn-default">Sign-in</a></li>
+            <li><a href="/register/">Register</a></li>
+            {% endif %}
+       </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<BR><BR><BR><BR>
+
+<div class="container-fluid" style="padding-left:10px">
 <h1>{{ lesson.name }}</h1>
+</div>
 {% if error_message %}
 <p><strong>{{ error_message }}</strong></p>
 {% endif %}
-{% for entry in lesson.entry_set.all %}
-<span id={{entry.lesson_header}}>
-<h2>{{ entry.lesson_header }}</h2></a>
-    <p><label for="entry{{ forloop.counter }}">{% autoescape off %}{{ entry.lesson_text }}{% endautoescape %}</label><br /></p>
-{% endfor %}
-<p align=right><a href="/../lessons/exercise/{{lesson.lesson_id}}" class="button"><span><font-size=14px>Next</font></span></a>
+<div class="container" style="width:100%">
+  <div class="row">
+    <nav class="col-sm-3">
+      <ul class="nav nav-pills-blue nav-stacked" data-spy="affix" data-offset-top="205">
+        {% for entry in lesson.entry_set.all %}
+        <li><a href=#{{entry.lesson_header}}>{{entry.lesson_header}}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <div class="col-sm-9" style="background-color:white">
+      {% for entry in lesson.entry_set.all %}
+      <span id={{entry.lesson_header}}></span>
+      <h2>{{ entry.lesson_header }}</h2>
+          <p>{% autoescape off %}{{ entry.lesson_text }}{% endautoescape %}<br /></p>
+      {% endfor %}
+      <div class="col-sm-3 col-sm-push-9"><a href="/../lessons/exercise/{{lesson.lesson_id}}"><button class="btn btn-block btn-primary">Next »</button></a></div>
+  </div>
 </div>
-<div id="mySidenav2" class="sidenav2">
- {% for entry in lesson.entry_set.all %}
- <a href=#{{entry.lesson_header}}>{{entry.lesson_header}}</a>
- {% endfor %}
- </div>
+</div>
 {% endblock %}
