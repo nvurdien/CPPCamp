@@ -1,6 +1,5 @@
 .DS_STORE
 *.sqlite3
-db.sqlite3
 __pycache__/
 *.py[cod]
 
