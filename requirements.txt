@@ -8,3 +8,6 @@ gunicorn==18.0
 wsgiref==0.1.2
 whitenoise==3.3.0
 django-password-reset==0.9
+django-widget-tweaks==1.4.1
+django-bootstrap-u==0.4.0
+django-crispy-forms
