@@ -83,8 +83,8 @@
 </div>
   <div class="section section-description">
          <div class="container">
-             <h2 class="section-title">Lessons</h2>
-  <h4 class="text-left">Write something about lessons here.
+             <h3 class="section-title">Lessons</h3>
+  <h6 class="text-left" style="text-transform:none">Comprehensive and friendly lessons designed to get anybody from beginner to code camper
 <BR> {% for lesson in latest_lesson_list %}
 <a href="/../lessons/{{lesson.lesson_id}}">{{lesson.name}}</a>
 <ul>
@@ -96,29 +96,29 @@
     <li><small><a href="/../lessons/exercise/{{lesson.lesson_id}}">{{lesson.name}} Exercises</a></small></li>
     <li><small><a href="/../lessons/quiz/{{lesson.lesson_id}}">{{lesson.name}} Quiz</a></small></li>
 </ul>
-{% endfor %}</h4>
+{% endfor %}</h6>
         </div>
   </div>
 
   <div class="section section-description">
          <div class="container">
-             <h2 class="section-title">Exercises</h2>
-<h4 class="text-left">Write something about exercises here
+             <h3 class="section-title">Exercises</h3>
+<h6 class="text-left" style="text-transform:none">Test your knowledge after each lesson to see what stuck
 <BR>
 <ul>    {% for lesson in latest_lesson_list %}
 <li><small><a href="/../lessons/exercise/{{lesson.lesson_id}}">{{lesson.name}} Exercises</a></small></li>
 {% endfor %}
-</ul></h4>
+</ul></h6>
 </div>
 </div>
 <div class="section section-description">
        <div class="container">
-           <h2 class="section-title">Quizzes</h2>
-<h4 class="text-left">Write something about quizzes here
+           <h3 class="section-title">Quizzes</h3>
+<h6 class="text-left" style="text-transform:none">Quizzes are like exercises but no hints so be careful!
 <BR>
 <ul>{% for lesson in latest_lesson_list %}
 <li><small><a href="/../lessons/quiz/{{lesson.lesson_id}}">{{lesson.name}} Quiz</a></small></li>
-{% endfor %}</ul></h4>
+{% endfor %}</ul></h6>
 
 </div>
 </div>
