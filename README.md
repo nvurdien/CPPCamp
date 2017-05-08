@@ -1,16 +1,27 @@
 # CPPCamp
 
-Do you guys wanna do parallax scrolling and add emails?
-
-https://www.w3schools.com/howto/howto_css_parallax.asp
-
-https://docs.djangoproject.com/en/1.10/topics/email/
-
-
-This an example of a progress bar: https://www.w3schools.com/howto/howto_js_progressbar.asp
-
 Instructions to download Django:
 
 https://www.djangoproject.com/download/
 
 You may need to install pip and python beforehand; also, have the command line or powershell if using windows
+Generally MACOSX comes with python so you would only need to download pip.
+
+To get pip:
+
+Download:
+https://pip.pypa.io//en/latest/installing/
+
+Run in terminal:
+cd [directory with get-pip.py]
+python get-pip.py
+
+Download Django:
+pip install Django==1.11.1
+
+
+Run website:
+cd [directory]/CPPCAMP-master
+python manage.py runserver
+
+Open Browser and open localhost:8000/
