@@ -1,5 +1,7 @@
 <!doctype html>
 {% load static %}
+
+{% load i18n widget_tweaks %}
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -71,6 +73,16 @@
                             Data & Variable Types
                         </a>
                     </li>
+										<li>
+                        <a href="/lessons/4/">
+                            Loop
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lessons/5/">
+                            Data Structures
+                        </a>
+                    </li>
                   </ul>
             </li>
             <li>
@@ -81,8 +93,8 @@
             {% if user.is_authenticated %}
             <li><a href="/logout/" class="btn btn-round btn-default">Sign-Out</a></li>
             {% else %}
-            <li><a href="/login/" class="btn btn-round btn-default">Sign-in</a></li>
-            <li><a href="/register/">Register</a></li>
+						<li><a href="/login/" class="btn btn-round btn-default">Sign-In</a></li>
+						<li><a href="/register/">Register</a></li>
             {% endif %}
        </ul>
 
@@ -100,6 +112,7 @@
               <small>Performs best on Google Chrome & Mozilla Firefox</small>
         </div>
 </footer>
+
 <script type="text/javascript" async="" src="http://tag.marinsm.com/serve/56026dc590a7b5bf54000030.js"></script>
 <script src="{% static 'lessons/js/jquery.js' %}" type="text/javascript"></script>
 <script src="{% static 'lessons/js/jquery-ui.custom.min.js' %}" type="text/javascript"></script>
@@ -180,12 +193,12 @@ body, html {
 
 .bgimg-2 {
   background-image: url("{% static 'lessons/img/DSCF3767.jpg' %}");
-  min-height: 400px;
+  min-height: 100px;
 }
 
 .bgimg-3 {
   background-image: url("https://c1.staticflickr.com/4/3895/14782749824_038c57e132_b.jpg");
-  min-height: 400px;
+  min-height: 100px;
 }
 .caption {
   position: absolute;
